@@ -1,0 +1,28 @@
+<h1>Listing Songs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Artist</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for song <- @songs do %>
+    <tr>
+      <td><%= song.title %></td>
+      <td><%= song.artist %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.song_path(@conn, :show, song) %></span>
+        <span><%= link "Edit", to: Routes.song_path(@conn, :edit, song) %></span>
+        <span><%= link "Delete", to: Routes.song_path(@conn, :delete, song), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Song", to: Routes.song_path(@conn, :new) %></span>
