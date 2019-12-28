@@ -1,0 +1,6 @@
+<h1>New Chart</h1>
+
+<%= render SdvxWeb.SongView, "_detail.html", assigns %>
+<%= render "form.html", Map.put(assigns, :action, Routes.chart_path(@conn, :create, @song.id)) %>
+
+<span><%= link "Back", to: Routes.chart_path(@conn, :index, @song.id) %></span>

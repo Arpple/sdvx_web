@@ -1,0 +1,32 @@
+<h1>Listing Charts</h1>
+
+<%= render SdvxWeb.SongView, "_detail.html", assigns %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Jacket</th>
+      <th>Pattern</th>
+      <th>Level</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for chart <- @charts do %>
+    <tr>
+      <td><img class="jacket-small" src="<%= chart.jacket_url %>"></td>
+      <td><%= chart.pattern %></td>
+      <td><%= chart.level %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.chart_path(@conn, :show, @song.id, chart) %></span>
+        <span><%= link "Edit", to: Routes.chart_path(@conn, :edit, @song.id, chart) %></span>
+        <span><%= link "Delete", to: Routes.chart_path(@conn, :delete, @song.id, chart), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Chart", to: Routes.chart_path(@conn, :new, @song.id) %></span>

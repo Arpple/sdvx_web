@@ -104,4 +104,108 @@ defmodule Sdvx.Tracks do
   def change_song(%Song{} = song) do
     Song.changeset(song, %{})
   end
+
+  alias Sdvx.Tracks.Chart
+
+  @doc """
+  Returns the list of charts.
+
+  ## Examples
+
+      iex> list_charts()
+      [%Chart{}, ...]
+
+  """
+  def list_charts(%Song{} = song) do
+    Chart
+    |> song_charts_query(song)
+    |> Ecto.Query.order_by([c], [desc: c.level])
+    |> Repo.all()
+  end
+
+  @doc """
+  Gets a single chart.
+
+  Raises `Ecto.NoResultsError` if the Chart does not exist.
+
+  ## Examples
+
+      iex> get_chart!(123)
+      %Chart{}
+
+      iex> get_chart!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_chart!(id), do: Repo.get!(Chart, id)
+
+  @doc """
+  Creates a chart.
+
+  ## Examples
+
+      iex> create_chart(%{field: value})
+      {:ok, %Chart{}}
+
+      iex> create_chart(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_chart(%Song{} = song, attrs \\ %{}) do
+    %Chart{}
+    |> Chart.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:song, song)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a chart.
+
+  ## Examples
+
+      iex> update_chart(chart, %{field: new_value})
+      {:ok, %Chart{}}
+
+      iex> update_chart(chart, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_chart(%Chart{} = chart, attrs) do
+    chart
+    |> Chart.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Chart.
+
+  ## Examples
+
+      iex> delete_chart(chart)
+      {:ok, %Chart{}}
+
+      iex> delete_chart(chart)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_chart(%Chart{} = chart) do
+    Repo.delete(chart)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking chart changes.
+
+  ## Examples
+
+      iex> change_chart(chart)
+      %Ecto.Changeset{source: %Chart{}}
+
+  """
+  def change_chart(%Chart{} = chart) do
+    Chart.changeset(chart, %{})
+  end
+
+  defp song_charts_query(query, %Song{ id: song_id }) do
+    from(v in query, where: v.song_id == ^song_id)
+  end
 end

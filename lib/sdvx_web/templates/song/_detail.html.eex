@@ -1,0 +1,13 @@
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @song.title %>
+  </li>
+
+  <li>
+    <strong>Artist:</strong>
+    <%= @song.artist %>
+  </li>
+
+</ul>

@@ -17,6 +17,7 @@ defmodule SdvxWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/songs/:song_id/charts", ChartController
     resources "/songs", SongController
   end
 

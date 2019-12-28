@@ -1,44 +1,23 @@
 defmodule Sdvx.Tracks.Chart do
-  import EctoEnum
-
-  defenum Pattern, :pattern, [
-    :nov,
-    :adv,
-    :exh,
-    :mxm,
-    :inf,
-    :grv,
-    :hvn,
-    :vvd,
-  ]
-
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "charts" do
-    field :level, :integer
-    field :jacket_url, :string
-    field :pattern, Pattern
-    field :delete, :boolean, virtual: true
+  alias Sdvx.Tracks.Song
 
-    belongs_to :song, Sdvx.Tracks.Song
+  schema "charts" do
+    field :jacket_url, :string
+    field :level, :integer
+    field :pattern, :string
+
+    belongs_to :song, Song
+
     timestamps()
   end
 
+  @doc false
   def changeset(chart, attrs) do
     chart
-    |> cast(attrs, [:level, :jacket_url, :pattern], [:delete])
+    |> cast(attrs, [:level, :jacket_url, :pattern])
     |> validate_required([:level, :jacket_url, :pattern])
-    |> validate_number(:level, greater_than: 0, less_than_or_equal_to: 20)
-    |> mark_delete()
-  end
-
-  def mark_delete(changeset) do
-    IO.inspect(changeset)
-    if get_change(changeset, :delete) do
-      %{ changeset | action: :delete }
-    else
-      changeset
-    end
   end
 end

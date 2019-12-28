@@ -1,0 +1,25 @@
+<h1>Show Chart</h1>
+
+<%= render SdvxWeb.SongView, "_detail.html", assigns %>
+
+<ul>
+
+  <li>
+    <strong>Level:</strong>
+    <%= @chart.level %>
+  </li>
+
+  <li>
+    <strong>Jacket url:</strong>
+    <%= @chart.jacket_url %>
+  </li>
+
+  <li>
+    <strong>Pattern:</strong>
+    <%= @chart.pattern %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.chart_path(@conn, :edit, @song.id, @chart) %></span>
+<span><%= link "Back", to: Routes.chart_path(@conn, :index, @song.id) %></span>

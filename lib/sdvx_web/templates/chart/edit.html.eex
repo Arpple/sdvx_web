@@ -1,0 +1,5 @@
+<h1>Edit Chart</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.chart_path(@conn, :update, @song.id, @chart)) %>
+
+<span><%= link "Back", to: Routes.chart_path(@conn, :index, @song.id) %></span>

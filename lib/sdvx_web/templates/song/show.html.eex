@@ -1,18 +1,6 @@
 <h1>Show Song</h1>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @song.title %>
-  </li>
-
-  <li>
-    <strong>Artist:</strong>
-    <%= @song.artist %>
-  </li>
-
-</ul>
+<%= render "_detail.html", assigns %>
 
 <span><%= link "Edit", to: Routes.song_path(@conn, :edit, @song) %></span>
 <span><%= link "Back", to: Routes.song_path(@conn, :index) %></span>
