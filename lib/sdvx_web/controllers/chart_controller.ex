@@ -58,7 +58,8 @@ defmodule SdvxWeb.ChartController do
         |> redirect(to: Routes.chart_path(conn, :index, song_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", chart: chart, changeset: changeset)
+        song = Tracks.get_song!(song_id)
+        render(conn, "edit.html", chart: chart, song: song, changeset: changeset)
     end
   end
 

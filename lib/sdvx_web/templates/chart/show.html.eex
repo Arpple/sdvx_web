@@ -9,16 +9,39 @@
     <%= @chart.level %>
   </li>
 
-  <li>
-    <strong>Jacket url:</strong>
-    <%= @chart.jacket_url %>
-  </li>
 
   <li>
     <strong>Pattern:</strong>
     <%= @chart.pattern %>
   </li>
 
+  <li>
+    <strong>Updated Date:</strong>
+    <%= @chart.updated_date %>
+  </li>
+
+  <li>
+    <strong>Jacket:</strong>
+    <%= @chart.jacket_url %>
+  </li>
+
+  <li>
+    <strong> Chart:</strong>
+    <%= if is_nil @chart.chart_url do %>
+      -
+    <% else %>
+      <a href="<%= @chart.updated_date %>">link</a>
+    <% end %>
+  </li>
+
+  <li>
+    <strong> Youtube:</strong>
+    <%= if is_nil @chart.chart_url do %>
+      -
+    <% else %>
+      <a href="<%= @chart.youtube_url %>">link</a>
+    <% end %>
+  </li>
 </ul>
 
 <span><%= link "Edit", to: Routes.chart_path(@conn, :edit, @song.id, @chart) %></span>

@@ -3,10 +3,13 @@ defmodule Sdvx.Repo.Migrations.CreateCharts do
 
   def change do
     create table(:charts) do
+      add :song_id, references(:songs)
       add :level, :integer
       add :jacket_url, :string
       add :pattern, :string
-      add :song_id, references(:songs)
+      add :updated_date, :date
+      add :chart_url, :string
+      add :youtube_url, :string
 
       timestamps()
     end

@@ -9,13 +9,25 @@
   <%= number_input f, :level %>
   <%= error_tag f, :level %>
 
+  <%= label f, :pattern %>
+  <%= text_input f, :pattern %>
+  <%= error_tag f, :pattern %>
+
+  <%= label f, :updated_date %>
+  <%= date_input f, :updated_date %>
+  <%= error_tag f, :updated_date %>
+
   <%= label f, :jacket_url %>
   <%= text_input f, :jacket_url %>
   <%= error_tag f, :jacket_url %>
 
-  <%= label f, :pattern %>
-  <%= text_input f, :pattern %>
-  <%= error_tag f, :pattern %>
+  <%= label f, :chart_url %>
+  <%= text_input f, :chart_url %>
+  <%= error_tag f, :chart_url %>
+
+  <%= label f, :youtube_url %>
+  <%= text_input f, :youtube_url %>
+  <%= error_tag f, :youtube_url %>
 
   <div>
     <%= submit "Save" %>
