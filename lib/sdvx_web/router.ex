@@ -21,8 +21,9 @@ defmodule SdvxWeb.Router do
     resources "/songs", SongController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", SdvxWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", SdvxWeb do
+    pipe_through :api
+
+    get "/songs", Api.SongController, :get
+  end
 end
