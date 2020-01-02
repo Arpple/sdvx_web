@@ -3,7 +3,7 @@ module Track exposing (Model, table)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (..)
-import Exts.List exposing (chunk)
+import List.Split exposing (chunksOfLeft)
 import Util
 
 
@@ -67,7 +67,7 @@ table tracks =
         chunked =
             tracks
                 |> List.map Just
-                |> chunk 3
+                |> chunksOfLeft 3
                 |> List.map (Util.padList 3 Nothing)
     in
     column [ height fill, width fill, Background.color <| rgb255 255 255 255 ] <|
