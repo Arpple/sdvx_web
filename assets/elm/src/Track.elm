@@ -27,16 +27,30 @@ trackAttr =
 
 bgColor : Color
 bgColor =
-    rgb255 100 100 100
+    rgb255 230 230 230
+
+
+sdvxInLink : Maybe String -> Element msg
+sdvxInLink maybeUrl =
+    case maybeUrl of
+        Just url ->
+            link [] { url = url, label = text "sdvx.in" }
+
+        Nothing ->
+            text ""
 
 
 trackDetail : Maybe Model -> Element msg
 trackDetail maybeModel =
     case maybeModel of
         Just model ->
-            el
+            column
                 (trackAttr ++ [ Background.color bgColor, selectionEffect ])
-                (text model.title)
+                [ el [] <| image [] { src = model.jacketUrl, description = "" }
+                , el [] <| text model.title
+                , el [] <| text (String.fromInt model.level)
+                , sdvxInLink model.chartUrl
+                ]
 
         Nothing ->
             el
@@ -68,9 +82,6 @@ table tracks =
                 |> List.map Just
                 |> chunksOfLeft 3
                 |> List.map (Util.padList 3 Nothing)
-
-        x =
-            Debug.log (String.fromInt (List.length tracks))
     in
     column [ height fill, width fill, Background.color <| rgb255 255 255 255 ] <|
         List.map trackRow chunked

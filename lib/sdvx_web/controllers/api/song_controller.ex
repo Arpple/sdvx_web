@@ -2,7 +2,7 @@ defmodule SdvxWeb.Api.SongController do
   use SdvxWeb, :controller
   alias Sdvx.Tracks.Chart
 
-  @fields [:id, :pattern, :level, :jacket_url, :title, :artist]
+  @fields [:id, :pattern, :level, :jacket_url, :title, :artist, :chart_url]
 
   def get(conn, _params) do
     songs = Sdvx.Api.get_songs()

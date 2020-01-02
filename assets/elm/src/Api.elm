@@ -8,4 +8,5 @@ type alias Song =
     , level : Int
     , pattern : String
     , jacketUrl : String
+    , chartUrl : Maybe String
     }

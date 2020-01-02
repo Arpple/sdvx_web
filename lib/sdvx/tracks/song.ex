@@ -15,7 +15,6 @@ defmodule Sdvx.Tracks.Song do
   def changeset(song, attrs) do
     song
     |> cast(attrs, [:title, :artist])
-    |> cast_assoc(:charts, required: true)
     |> validate_required([:title, :artist])
   end
 end

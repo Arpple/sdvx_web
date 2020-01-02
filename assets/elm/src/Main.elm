@@ -7,7 +7,7 @@ import Element.Background exposing (..)
 import Html exposing (Html, div, h1, img, text)
 import Html.Attributes exposing (src)
 import Http
-import Json.Decode as JD exposing (Decoder, dict, field, int, list, string)
+import Json.Decode as JD exposing (Decoder, field, int, list, nullable, string)
 import Track
 
 
@@ -27,13 +27,14 @@ type Msg
 
 songDecoder : Decoder Song
 songDecoder =
-    JD.map6 Song
+    JD.map7 Song
         (field "id" int)
         (field "title" string)
         (field "artist" string)
         (field "level" int)
         (field "pattern" string)
         (field "jacket_url" string)
+        (field "chart_url" (nullable string))
 
 
 init : () -> ( Model, Cmd Msg )
