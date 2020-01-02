@@ -1,5 +1,6 @@
 module Track exposing (Model, table)
 
+import Api exposing (Song)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (..)
@@ -8,9 +9,7 @@ import Util
 
 
 type alias Model =
-    { name : String
-    , index : Int
-    }
+    Song
 
 
 selectionEffect : Attribute msg
@@ -37,7 +36,7 @@ trackDetail maybeModel =
         Just model ->
             el
                 (trackAttr ++ [ Background.color bgColor, selectionEffect ])
-                (text model.name)
+                (text model.title)
 
         Nothing ->
             el
@@ -69,6 +68,9 @@ table tracks =
                 |> List.map Just
                 |> chunksOfLeft 3
                 |> List.map (Util.padList 3 Nothing)
+
+        x =
+            Debug.log (String.fromInt (List.length tracks))
     in
     column [ height fill, width fill, Background.color <| rgb255 255 255 255 ] <|
         List.map trackRow chunked
