@@ -6,7 +6,8 @@ defmodule Sdvx.Api do
 
   def get_songs() do
     query = from c in Chart,
-      order_by: [desc: c.updated_date],
+      group_by: [c.song_id, c.id],
+      order_by: [desc: c.updated_date, asc: c.level],
       preload: [:song]
 
     Repo.all(query)

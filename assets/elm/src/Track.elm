@@ -1,6 +1,6 @@
 module Track exposing (Model, table)
 
-import Api exposing (Song)
+import Api exposing (Chart, Song)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (..)
@@ -22,6 +22,7 @@ trackAttr =
     [ spacing 15
     , height fill
     , width fill
+    , padding 15
     ]
 
 
@@ -30,27 +31,40 @@ bgColor =
     rgb255 230 230 230
 
 
-sdvxInLink : Maybe String -> Element msg
-sdvxInLink maybeUrl =
-    case maybeUrl of
+chartDetail : Chart -> Element msg
+chartDetail chart =
+    let
+        str =
+            chart.pattern ++ " : " ++ String.fromInt chart.level
+    in
+    case chart.chartUrl of
         Just url ->
-            link [] { url = url, label = text "sdvx.in" }
+            link [] { url = url, label = text <| str }
 
         Nothing ->
-            text ""
+            text str
 
 
 trackDetail : Maybe Model -> Element msg
 trackDetail maybeModel =
     case maybeModel of
         Just model ->
-            column
-                (trackAttr ++ [ Background.color bgColor, selectionEffect ])
-                [ el [] <| image [] { src = model.jacketUrl, description = "" }
-                , el [] <| text model.title
-                , el [] <| text (String.fromInt model.level)
-                , sdvxInLink model.chartUrl
-                ]
+            let
+                last =
+                    List.reverse model.charts |> List.head
+            in
+            case last of
+                Nothing ->
+                    el [] (text "")
+
+                Just l ->
+                    column
+                        (trackAttr ++ [ Background.color bgColor, selectionEffect ])
+                        ([ el [ centerX ] <| image [] { src = l.jacketUrl, description = "" }
+                         , el [ centerX ] <| text model.title
+                         ]
+                            ++ List.map chartDetail model.charts
+                        )
 
         Nothing ->
             el

@@ -1,6 +1,6 @@
-module Main exposing (..)
+module Main exposing (Model(..), Msg(..), chartDecoder, init, main, songDecoder, update, view)
 
-import Api exposing (Song)
+import Api exposing (Chart, Song)
 import Browser
 import Element exposing (..)
 import Element.Background exposing (..)
@@ -25,16 +25,22 @@ type Msg
     = GotText (Result Http.Error (List Song))
 
 
-songDecoder : Decoder Song
-songDecoder =
-    JD.map7 Song
-        (field "id" int)
-        (field "title" string)
-        (field "artist" string)
+chartDecoder : Decoder Chart
+chartDecoder =
+    JD.map4 Chart
         (field "level" int)
         (field "pattern" string)
         (field "jacket_url" string)
         (field "chart_url" (nullable string))
+
+
+songDecoder : Decoder Song
+songDecoder =
+    JD.map4 Song
+        (field "id" int)
+        (field "title" string)
+        (field "artist" string)
+        (field "charts" (list chartDecoder))
 
 
 init : () -> ( Model, Cmd Msg )
