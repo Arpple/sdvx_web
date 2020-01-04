@@ -4,6 +4,7 @@ import Api exposing (Chart, Song)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (..)
+import Element.Font as Font
 import List.Split exposing (chunksOfLeft)
 import Util
 
@@ -39,10 +40,10 @@ chartDetail chart =
     in
     case chart.chartUrl of
         Just url ->
-            link [] { url = url, label = text <| str }
+            link [ Font.size 16 ] { url = url, label = text <| str }
 
         Nothing ->
-            text str
+            el [ Font.size 16, Font.color <| rgb255 150 150 150 ] <| text str
 
 
 trackDetail : Maybe Model -> Element msg

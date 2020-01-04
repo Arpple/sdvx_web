@@ -8,6 +8,7 @@ defmodule SdvxWeb.Api.SongController do
     songs = Sdvx.Api.get_songs()
     |> Enum.group_by(&(&1.song_id))
     |> Enum.map(&format_song/1)
+    |> Enum.sort(&sort_update/2)
 
     json conn, songs
   end
@@ -20,10 +21,15 @@ defmodule SdvxWeb.Api.SongController do
       artist: first.song.artist,
       title: first.song.title,
       charts: Enum.map(charts, &format_chart/1),
+      updated_date: first.song.updated_date
     }
   end
 
   defp format_chart(%Chart{} = chart) do
     Map.take(chart, @fields)
+  end
+
+  defp sort_update(song1, song2) do
+    Date.compare(song1.updated_date, song2.updated_date) == :gt
   end
 end
