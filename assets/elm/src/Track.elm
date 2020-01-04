@@ -62,7 +62,7 @@ trackDetail maybeModel =
                     column
                         (trackAttr ++ [ Background.color bgColor, selectionEffect ])
                         ([ el [ centerX ] <| image [] { src = l.jacketUrl, description = "" }
-                         , el [ centerX ] <| text model.title
+                         , el [ centerX ] <| paragraph [ Font.size 18 ] [ text model.title ]
                          ]
                             ++ List.map chartDetail model.charts
                         )
@@ -77,6 +77,7 @@ track : Maybe Model -> Element msg
 track maybeModel =
     column
         [ width fill
+        , height fill
         , padding 15
         , spacing 7
         ]
