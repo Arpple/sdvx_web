@@ -13,10 +13,6 @@
   <%= text_input f, :pattern %>
   <%= error_tag f, :pattern %>
 
-  <%= label f, :updated_date %>
-  <%= date_input f, :updated_date %>
-  <%= error_tag f, :updated_date %>
-
   <%= label f, :jacket_url %>
   <%= text_input f, :jacket_url %>
   <%= error_tag f, :jacket_url %>
