@@ -13,10 +13,20 @@ defmodule SdvxWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug BasicAuth, use_config: {:sdvx, :auth}
+  end
+
   scope "/", SdvxWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/admin", SdvxWeb do
+    pipe_through :browser
+    pipe_through :admin
+
     resources "/songs/:song_id/charts", ChartController
     resources "/songs", SongController
   end

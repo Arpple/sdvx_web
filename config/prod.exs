@@ -16,6 +16,10 @@ config :sdvx, SdvxWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :sdvx, :auth,
+  username: {:system, "ADMIN_USERNAME"},
+  password: {:system, "ADMIN_PASSWORD"}
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
