@@ -14,7 +14,7 @@ type alias Model =
 
 selectionEffect : Attribute msg
 selectionEffect =
-    mouseOver [ Background.color <| rgb255 86 182 139 ]
+    mouseOver [ Background.color <| rgb255 200 255 200 ]
 
 
 trackAttr : List (Attribute msg)

@@ -6,6 +6,7 @@ defmodule Sdvx.Tracks.Song do
   schema "songs" do
     field :artist, :string
     field :title, :string
+    field :updated_date, :date
     has_many :charts, Chart
 
     timestamps()
@@ -14,7 +15,7 @@ defmodule Sdvx.Tracks.Song do
   @doc false
   def changeset(song, attrs) do
     song
-    |> cast(attrs, [:title, :artist])
-    |> validate_required([:title, :artist])
+    |> cast(attrs, [:title, :artist, :updated_date])
+    |> validate_required([:title, :artist, :updated_date])
   end
 end

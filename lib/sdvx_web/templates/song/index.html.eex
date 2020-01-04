@@ -5,6 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Artist</th>
+      <th>Updated</th>
 
       <th></th>
       <th></th>
@@ -15,6 +16,7 @@
     <tr>
       <td><%= song.title %></td>
       <td><%= song.artist %></td>
+      <td><%= song.updated_date %></td>
 
       <td>
         <span><%= link "Charts", to: Routes.chart_path(@conn, :index, song.id) %></span>
